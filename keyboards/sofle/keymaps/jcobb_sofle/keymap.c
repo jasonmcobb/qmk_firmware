@@ -535,7 +535,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LEFT);
             }
             return false;
-        case KC_SCR_L:
+        case KC_SCR_R:
             if (record->event.pressed) {
                 register_mods(mod_config(MOD_LCTL));
                 register_code(KC_RIGHT);
@@ -720,9 +720,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            tap_code(KC_PGDOWN);
+            tap_code(KC_SCR_R);
         } else {
-            tap_code(KC_PGUP);
+            tap_code(KC_SCR_L);
         }
     }
     return true;
