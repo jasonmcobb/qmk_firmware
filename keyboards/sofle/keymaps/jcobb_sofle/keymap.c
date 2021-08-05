@@ -22,9 +22,7 @@ enum custom_keycodes {
     KC_DLINE,
     KC_BSPC_DEL,
     KC_LAYER,
-    KC_FOLD,
-    KC_SCR_R,
-    KC_SCR_L
+    KC_FOLD
 };
 
 
@@ -535,15 +533,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_code(KC_LEFT);
             }
             return false;
-        case KC_SCR_R:
-            if (record->event.pressed) {
-                register_mods(mod_config(MOD_LCTL));
-                register_code(KC_RIGHT);
-            } else {
-                unregister_mods(mod_config(MOD_LCTL));
-                unregister_code(KC_RIGHT);
-            }
-            return false;
         case KC_PRVWD:
             if (record->event.pressed) {
                 if (keymap_config.swap_lctl_lgui) {
@@ -720,10 +709,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            // tap_code(KC_SCR_R);
-            SS_LCTRL(SS_TAP(KC_RIGHT));
+            tap_code16(LCTL(KC_RIGHT));
         } else {
-            SS_LCTRL(SS_TAP(KC_LEFT));
+            tap_code16(LCTL(KC_LEFT));
         }
     }
     return true;
