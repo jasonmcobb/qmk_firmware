@@ -721,9 +721,9 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
     } else if (index == 1) {
         if (clockwise) {
             // tap_code(KC_SCR_R);
-            SEND_STRING(SS_LCTRL(SS_TAP(KC_RIGHT)));
+            SS_LCTRL(SS_TAP(KC_RIGHT));
         } else {
-            SEND_STRING(SS_LCTRL(SS_TAP(KC_LEFT)));
+            SS_LCTRL(SS_TAP(KC_LEFT));
         }
     }
     return true;
