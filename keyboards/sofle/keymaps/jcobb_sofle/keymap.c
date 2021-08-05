@@ -720,9 +720,10 @@ bool encoder_update_user(uint8_t index, bool clockwise) {
         }
     } else if (index == 1) {
         if (clockwise) {
-            tap_code(KC_SCR_R);
+            // tap_code(KC_SCR_R);
+            SEND_STRING(SS_LCTRL(SS_TAP(KC_RIGHT)));
         } else {
-            tap_code(KC_SCR_L);
+            SEND_STRING(SS_LCTRL(SS_TAP(KC_LEFT)));
         }
     }
     return true;
