@@ -22,7 +22,9 @@ enum custom_keycodes {
     KC_DLINE,
     KC_BSPC_DEL,
     KC_LAYER,
-    KC_FOLD
+    KC_FOLD,
+    KC_SCR_R,
+    KC_SCR_L
 };
 
 
@@ -380,7 +382,6 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
     } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
         oled_off();
     }
-
 }
 
 /* KEYBOARD PET END */
@@ -451,8 +452,8 @@ static void print_status_narrow(void) {
     }
 
     /* caps lock */
-    oled_set_cursor(0,8);
-    oled_write("CPSLK", led_usb_state.caps_lock);
+    // oled_set_cursor(0,8);
+    // oled_write("CPSLK", led_usb_state.caps_lock);
 
     /* KEYBOARD PET RENDER START */
 
@@ -523,6 +524,24 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_mods(mod_config(MOD_LCTL));
                 unregister_code(KC_LALT);
                 unregister_code(KC_MINS);
+            }
+            return false;
+        case KC_SCR_L:
+            if (record->event.pressed) {
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_LEFT);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_LEFT);
+            }
+            return false;
+        case KC_SCR_L:
+            if (record->event.pressed) {
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_RIGHT);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_RIGHT);
             }
             return false;
         case KC_PRVWD:
