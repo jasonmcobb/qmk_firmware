@@ -21,8 +21,12 @@ enum custom_keycodes {
     KC_LEND,
     KC_DLINE,
     KC_LAYER,
+<<<<<<< HEAD
     KC_JBFOLD,
     KC_JBTERM,
+=======
+    KC_FOLD
+>>>>>>> bdb9b39dce096e567e1f0035142995223acdb3b8
 };
 
 
@@ -482,6 +486,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             return false;
         case KC_JBTERM:
             if (record->event.pressed) {
+<<<<<<< HEAD
                 // register_mods(mod_config(MOD_LCTL));
                 register_code(KC_LALT);
                 register_code(KC_F12);
@@ -489,6 +494,13 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 // unregister_mods(mod_config(MOD_LCTL));
                 unregister_code(KC_LALT);
                 unregister_code(KC_F12);
+=======
+                register_mods(mod_config(MOD_LCTL));
+                register_code(KC_LEFT);
+            } else {
+                unregister_mods(mod_config(MOD_LCTL));
+                unregister_code(KC_LEFT);
+>>>>>>> bdb9b39dce096e567e1f0035142995223acdb3b8
             }
             return false;
         case KC_PRVWD:
