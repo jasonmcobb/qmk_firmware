@@ -12,7 +12,7 @@ My layout for the sofle keyboard, will eventually update this with a screenshot 
 - Layer 4 `_ADJUST` is Toggling QWERTY <> GAMING and WINDOWS <> MAC
 
 ### Keymap Image:
-![My Layout](./jcobb_sofle_v1_layout.png)
+![My Layout](./jcobb_sofle_v1_layout.mine)
 
 ## Compiling Notes:
 
