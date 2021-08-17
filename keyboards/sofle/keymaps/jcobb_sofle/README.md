@@ -2,6 +2,16 @@
 My layout for the sofle keyboard, will eventually update this with a screenshot of the layout.
 
 ## Layout Image:
+
+### Keymap Notes:
+
+- Layer 0 `_QWERTY` is my day to day
+- Layer 1 `_GAMING` is gaming (swaps a few keys)
+- Layer 2 `_LOWER` is symbols used regularly, need to adjust these a bit.
+- Layer 3 `_RAISE` is naviagation, KC_JBTERM opens and closes the terminal and KC_JBFOLD folds methods to definitions, both of these are specific to JetBrains IDEs
+- Layer 4 `_ADJUST` is Toggling QWERTY <> GAMING and WINDOWS <> MAC
+
+### Keymap Image:
 ![My Layout](./jcobb_sofle_v1_layout.png)
 
 ## Compiling Notes:
