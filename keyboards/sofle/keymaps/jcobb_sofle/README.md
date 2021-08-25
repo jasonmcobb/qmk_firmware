@@ -1,16 +1,30 @@
 # My Sofle Keyboard
 My layout for the sofle keyboard, will eventually update this with a screenshot of the layout.
 
+## Layout Image:
+
+### Keymap Notes:
+
+- Layer 0 `_QWERTY` is my day to day
+- Layer 1 `_GAMING` is gaming (swaps a few keys)
+- Layer 2 `_LOWER` is symbols used regularly, need to adjust these a bit.
+- Layer 3 `_RAISE` is naviagation, KC_JBTERM opens and closes the terminal and KC_JBFOLD folds methods to definitions, both of these are specific to JetBrains IDEs
+- Layer 4 `_ADJUST` is Toggling QWERTY <> GAMING and WINDOWS <> MAC
+
+### Keymap Image:
+![My Layout](./jcobb_sofle_v1_layout.mine)
+
 ## Compiling Notes:
 
-- `qmk compile --kb sofle/rev1 --km sofle_keyboard_layout` Run this command to compile.
+- `qmk compile --kb sofle/rev1 --km jcobb_sofle` Run this command to compile.
 - Cannot have a keymap json file in the folder anywhere. It breaks the compling.
+- Need to mirror this layout as much as possible to my lily58
 
 ## Known Current issues (Unsure if keyboard or firmware issues)
 
-- screen flickers when "sleeping"
+- ~~screen flickers when "sleeping"~~ Resolved!
   - I think this is due to the addition of Luna the keyboard pet.
-- Screen on right half just doesn't work, might need to remove and resolder it, will look into after next 2 builds are done.
+- ~~Screen on right half just doesn't work, might need to remove and resolder it, will look into after next 2 builds are done.~~ Bad screen, has been replaced.
 
 ## Things I want to change or add:
 
