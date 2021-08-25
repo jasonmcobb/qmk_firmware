@@ -3,6 +3,7 @@
 enum sofle_layers {
     /* _M_XYZ = Mac Os, _W_XYZ = Win/Linux */
     _QWERTY,
+    _COLEMAK,
     _GAMING,
     _LOWER,
     _RAISE,
@@ -12,6 +13,7 @@ enum sofle_layers {
 enum custom_keycodes {
     KC_QWERTY = SAFE_RANGE,
     KC_GAMING,
+    KC_COLEMAK,
     KC_LOWER,
     KC_RAISE,
     KC_ADJUST,
@@ -24,7 +26,6 @@ enum custom_keycodes {
     KC_JBFOLD,
     KC_JBTERM,
 };
-
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 /*
@@ -50,6 +51,31 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE,        KC_NO, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,\
     KC_LGUI, KC_LALT, KC_LCTL, KC_LOWER, KC_ENT,             KC_SPC, KC_RAISE, KC_RCTL, KC_RALT, KC_RGUI \
     ),
+
+/*
+ * COLEMAK
+ * ,-----------------------------------------.                    ,-----------------------------------------.
+ * |  `   |   1  |   2  |   3  |   4  |   5  |                    |   6  |   7  |   8  |   9  |   0  |  `   |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | ESC  |   Q  |   W  |   F  |   P  |   G  |                    |   J  |   L  |   U  |   Y  |   ;  | Bspc |
+ * |------+------+------+------+------+------|                    |------+------+------+------+------+------|
+ * | TAB  |   A  |   R  |   S  |   T  |   D  |-------.    ,-------|   H  |   N  |   E  |   I  |   O  |  '   |
+ * |------+------+------+------+------+------|  MUTE |    |       |------+------+------+------+------+------|
+ * |LShift|   Z  |   X  |   C  |   V  |   B  |-------|    |-------|   K  |   M  |   ,  |   .  |   /  |RShift|
+ * `-----------------------------------------/       /     \      \-----------------------------------------'
+ *            | LGUI | LAlt | LCTR |LOWER | /Enter  /       \Space \  |RAISE | RCTR | RAlt | RGUI |
+ *            |      |      |      |      |/       /         \      \ |      |      |      |      |
+ *            `----------------------------------'           '------''---------------------------'
+ */
+
+[_COLEMAK] = LAYOUT( \
+  KC_GRV,   KC_1,   KC_2,    KC_3,    KC_4,    KC_5,                      KC_6,    KC_7,    KC_8,    KC_9,    KC_0,  KC_GRV, \
+  KC_TAB,   KC_Q,   KC_W,    KC_F,    KC_P,    KC_G,                      KC_J,    KC_L,    KC_U,    KC_Y, KC_SCLN,  KC_BSPC, \
+  KC_LCTL,   KC_A,   KC_R,    KC_S,    KC_T,    KC_D,                      KC_H,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT, \
+  KC_LSFT,  KC_Z,   KC_X,    KC_C,    KC_V,    KC_B, KC_MUTE,      XXXXXXX,KC_K,    KC_M, KC_COMM,  KC_DOT, KC_SLSH,  KC_RSFT, \
+                 KC_LGUI,KC_LALT,KC_LCTRL,KC_LOWER, KC_ENT,      KC_SPC,  KC_RAISE, KC_RCTRL, KC_RALT, KC_RGUI \
+),
+
 /*
  * GAMING
  * ,-----------------------------------------.                    ,-----------------------------------------.
@@ -89,8 +115,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 [_LOWER] = LAYOUT( \
     KC_ESC, KC_F1, KC_F2, KC_F3, KC_F4, KC_F5,                         KC_F6, KC_F7, KC_F8, KC_F9, KC_F10, KC_F11, \
-    KC_TRNS, KC_EXLM, KC_AT, KC_HASH, KC_LPRN, KC_RPRN,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_F12, \
-    KC_TRNS, KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,                    KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+    KC_TRNS, KC_EXLM, KC_AT, KC_HASH, KC_LPRN, KC_RPRN,                     KC_NO, KC_NO, LCTL(KC_UP), KC_NO, KC_NO, KC_F12, \
+    KC_TRNS, KC_EQL, KC_MINS, KC_PLUS, KC_LCBR, KC_RCBR,                    KC_NO, LCTL(KC_LEFT), LCTL(KC_DOWN), LCTL(KC_RIGHT), KC_NO, KC_NO, \
     KC_TRNS, KC_EQL, KC_UNDS, KC_PLUS, KC_LBRC, KC_RBRC, KC_TRNS,        KC_TRNS, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_TRNS, \
             KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS,                  KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS, KC_TRNS \
     ),
@@ -129,8 +155,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  *            |      |      |      |      |/       /         \      \ |      |      |      |      |
  *            `----------------------------------'           '------''---------------------------'
  */
-[_ADJUST] =LAYOUT( \
-    KC_NO, KC_QWERTY, KC_GAMING, CG_TOGG, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
+[_ADJUST] = LAYOUT( \
+    KC_NO, KC_QWERTY, KC_COLEMAK, KC_GAMING, CG_TOGG, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,                     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
     KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO,         KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, KC_NO, \
@@ -376,6 +402,9 @@ static void print_status_narrow(void) {
         case _QWERTY:
             oled_write("QWRTY", false);
             break;
+        case _COLEMAK:
+            oled_write("COLMK", false);
+            break;
         case _GAMING:
             oled_write("GAMES", false);
             break;
@@ -393,6 +422,7 @@ static void print_status_narrow(void) {
         case _GAMING:
             oled_write("Games", false);
             break;
+        case _COLEMAK:
         case _QWERTY:
             oled_write("Base ", false);
             break;
@@ -437,6 +467,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_QWERTY:
             if (record->event.pressed) {
                 set_single_persistent_default_layer(_QWERTY);
+            }
+            return false;
+        case KC_COLEMAK:
+            if (record->event.pressed) {
+                set_single_persistent_default_layer(_COLEMAK);
             }
             return false;
         case KC_GAMING:

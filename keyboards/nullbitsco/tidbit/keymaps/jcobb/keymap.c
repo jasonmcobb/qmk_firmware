@@ -21,19 +21,25 @@
 
 #define _NUMPAD     0
 #define _FUNC     1
+#define _DIABLO     2
 
 enum custom_keycodes {
   PROG = SAFE_RANGE,
+  KC_ALTTOG
 };
 
 enum td_keycodes {
-    TD_ENTER_LAYER
+    TD_ENTER_LAYER,
+    TD_TOGALT_LAYER
 };
+
+bool altheld = false;
 
 // Tap Dance definitions
 qk_tap_dance_action_t tap_dance_actions[] = {
     // Tap once for KP_ENTER, twice for _FUNC layer
     [TD_ENTER_LAYER] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_KP_ENTER, 1),
+    [TD_TOGALT_LAYER] = ACTION_TAP_DANCE_LAYER_TOGGLE(KC_F1, 0),
 };
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
@@ -41,10 +47,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_NUMPAD] = LAYOUT(
            KC_NO,    KC_KP_ASTERISK, KC_KP_MINUS, \
   KC_KP_7, KC_KP_8,  KC_KP_9,        KC_KP_PLUS, \
-  KC_KP_4, KC_KP_5,  KC_KP_6,        KC_NO, \
+  KC_KP_4, KC_KP_5,  KC_KP_6,        TO(_DIABLO), \
   KC_KP_1, KC_KP_2,  KC_KP_3,        TD(TD_ENTER_LAYER), \
-  KC_NO,   KC_KP_0,  KC_KP_DOT,      KC_NO \
+  KC_NO,   KC_KP_0,  KC_KP_DOT,      KC_ALTTOG \
   ),
+
+  [_DIABLO] = LAYOUT(
+           TO(_NUMPAD),    KC_KP_ASTERISK, KC_KP_MINUS, \
+  KC_F1, KC_F2,  KC_F3,        KC_F4, \
+  KC_F5, KC_F6,  KC_F7,        KC_F8, \
+  KC_KP_1, KC_KP_2,  KC_KP_3,        KC_KP_4, \
+  KC_C,   KC_T,  KC_GRV,      KC_ALTTOG \
+  ),
+
   // Function layer (numpad)
   [_FUNC] = LAYOUT(
            KC_NO, RGB_TOG, KC_NO,
@@ -116,12 +131,18 @@ static void print_status_narrow(void) {
         case _NUMPAD:
             oled_write("NUMPD", false);
             break;
+        case _DIABLO:
+            oled_write("DABLO", false);
+            break;
         case _FUNC:
             oled_write("FUNC ", false);
             break;
         default:
             oled_write("Undef", false);
     }
+
+    oled_set_cursor(0,8);
+    oled_write("ALT", altheld);
 }
 
 void oled_task_user(void) {
@@ -150,7 +171,17 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         bootloader_jump(); //jump to bootloader
       }
     break;
-
+    case KC_ALTTOG:
+      if(record->event.pressed){
+        if(altheld == false){
+          register_code(KC_LALT);
+          altheld = true;
+        }else if(altheld == true){
+          unregister_code(KC_LALT);
+          altheld = false;
+        }
+      }
+      break;
     default:
     break;
   }
