@@ -45,10 +45,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
  */
 
 [_QWERTY] = LAYOUT( \
-    KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5,                         KC_6, KC_7, KC_8, KC_9, KC_0, KC_BSLS, \
-    KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T,                         KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSPC, \
-    KC_LCTL, KC_A, KC_S, KC_D, KC_F, KC_G,                        KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, \
-    KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_MUTE,        KC_NO, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,\
+    KC_GRV, KC_1, KC_2, KC_3, KC_4, KC_5,                         KC_6, KC_7, KC_8, KC_9, KC_0, KC_EQL, \
+    KC_TAB, KC_Q, KC_W, KC_E, KC_R, KC_T,                         KC_Y, KC_U, KC_I, KC_O, KC_P, KC_BSLS, \
+    KC_LGUI, KC_A, KC_S, KC_D, KC_F, KC_G,                        KC_H, KC_J, KC_K, KC_L, KC_SCLN, KC_QUOT, \
+    KC_LSFT, KC_Z, KC_X, KC_C, KC_V, KC_B, KC_DEL,        KC_BSPC, KC_N, KC_M, KC_COMM, KC_DOT, KC_SLSH, KC_RSFT,\
     KC_LALT, KC_LCTL, KC_LOWER, KC_ENT,             KC_SPC, KC_RAISE, KC_RCTL, KC_RALT \
     ),
 
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
     )
 };
 
-#ifdef OLED_DRIVER_ENABLE
+#ifdef OLED_ENABLE
 
 /* 32 * 14 os logos */
 static const char PROGMEM windows_logo[] = {
@@ -178,6 +178,17 @@ static const char PROGMEM mac_logo[] = {
         0xf0, 0xf6, 0xfb, 0xfb, 0x38, 0x10, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
         0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x01, 0x07, 0x0f, 0x1f, 0x1f,
         0x0f, 0x0f, 0x1f, 0x1f, 0x0f, 0x06, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00
+};
+
+static const char PROGMEM coffee_cup[] = {
+        0x00, 0x00, 0x00, 0x00, 0x00, 0xc0, 0xe3, 0x3f, 0x1e, 0x00, 0x00, 0xc0, 0xe3, 0x3f, 0x1e, 0x00,
+        0x00, 0xc0, 0xe3, 0x3f, 0x1e, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc1, 0xc7, 0xc6, 0xc0, 0xc0, 0xc0, 0xc1, 0xc7, 0xc6, 0xc0, 0xc0,
+        0xc0, 0xc1, 0xc7, 0xc6, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0x80, 0x80, 0x00, 0x00, 0x00, 0x00,
+        0x7f, 0xff, 0xc0, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00,
+        0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x00, 0x80, 0xff, 0xff, 0x81, 0x81, 0x83, 0xe7, 0xfe, 0x3c,
+        0xc0, 0xc1, 0xc7, 0xce, 0xdc, 0xf8, 0xf0, 0xe0, 0xe0, 0xe0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0, 0xc0,
+        0xe0, 0xe0, 0xe0, 0xf0, 0xf8, 0xdc, 0xce, 0xc7, 0xc1, 0xc1, 0x01, 0x01, 0x01, 0x00, 0x00, 0x00
 };
 
 /* Smart Backspace Delete */
@@ -367,23 +378,24 @@ static void print_logo_narrow(void) {
     oled_set_cursor(0,3);
     oled_write("Cobb_",false);
     oled_set_cursor(0,5);
-    oled_write("Sofle",false);
+    oled_write("Lily",false);
     oled_set_cursor(0,6);
-    oled_write("  .V1",false);
-
+    oled_write("   58", false);
+    oled_set_cursor(0,10);
+    oled_write_raw_P(coffee_cup, sizeof(coffee_cup));
     /* wpm counter */
-    uint8_t n = get_current_wpm();
-    char wpm_str[5];
-    oled_set_cursor(0,14);
-    wpm_str[4] = '\0';
-    wpm_str[3] = '0' + n % 10;
-    wpm_str[2] = '0' + ( n /= 10) % 10;
-    wpm_str[1] = '0' + n / 10;
-    wpm_str[0] = ' ';
-    oled_write(wpm_str, false);
+    // uint8_t n = get_current_wpm();
+    // char wpm_str[5];
+    // oled_set_cursor(0,14);
+    // wpm_str[4] = '\0';
+    // wpm_str[3] = '0' + n % 10;
+    // wpm_str[2] = '0' + ( n /= 10) % 10;
+    // wpm_str[1] = '0' + n / 10;
+    // wpm_str[0] = ' ';
+    // oled_write(wpm_str, false);
 
-    oled_set_cursor(0,15);
-    oled_write(" wpm", false);
+    // oled_set_cursor(0,15);
+    // oled_write(" wpm", false);
 }
 
 static void print_status_narrow(void) {
