@@ -30,6 +30,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define TAPPING_TERM 100
 #define OLED_BRIGHTNESS 255
 #define OLED_TIMEOUT 120000
+#define SPLIT_OLED_ENABLE
 
 // #undef RGBLED_NUM
 // #define RGBLIGHT_ANIMATIONS
