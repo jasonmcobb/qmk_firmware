@@ -445,7 +445,7 @@ void render_bootmagic_status(bool status) {
     }
 }
 
-void print_logo_logo(void) {
+void print_logo_narrow(void) {
     oled_set_cursor(0,3);
     oled_write("Cobb_",false);
     oled_set_cursor(0,5);
