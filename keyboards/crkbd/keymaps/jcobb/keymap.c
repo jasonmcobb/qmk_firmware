@@ -29,6 +29,23 @@ enum layer_number {
     _ADJUST,
 };
 
+enum custom_keycodes {
+    KC_QWERTY = SAFE_RANGE,
+    KC_GAMING,
+    KC_COLEMAK,
+    KC_LOWER,
+    KC_RAISE,
+    KC_ADJUST,
+    KC_PRVWD,
+    KC_NXTWD,
+    KC_LSTRT,
+    KC_LEND,
+    KC_DLINE,
+    KC_LAYER,
+    KC_JBFOLD,
+    KC_JBTERM,
+};
+
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_QWERTY] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
