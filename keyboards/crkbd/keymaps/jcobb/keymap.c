@@ -445,7 +445,7 @@ void render_bootmagic_status(bool status) {
     }
 }
 
-void oled_render_logo(void) {
+void print_logo_logo(void) {
     oled_set_cursor(0,3);
     oled_write("Cobb_",false);
     oled_set_cursor(0,5);
@@ -453,7 +453,7 @@ void oled_render_logo(void) {
     oled_set_cursor(0,6);
     oled_write("   58", false);
     oled_set_cursor(0,10);
-    oled_write_raw_P(coffee_cup, sizeof(coffee_cup));,
+    oled_write_raw_P(coffee_cup, sizeof(coffee_cup));
 }
 
 bool oled_task_user(void) {
